@@ -79,6 +79,7 @@ def run(
     source = str(source)
     save_img = not nosave and not source.endswith('.txt')  # save inference images
     is_file = Path(source).suffix[1:] in (IMG_FORMATS + VID_FORMATS)
+    is_video = Path(source).suffix[1:] in (VID_FORMATS)
     is_url = source.lower().startswith(('rtsp://', 'rtmp://', 'http://', 'https://'))
     webcam = source.isnumeric() or source.endswith('.txt') or (is_url and not is_file)
     if is_url and is_file:
@@ -103,16 +104,17 @@ def run(
     else:
         dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt)
         bs = 1  # batch_size
-        # Compute total frames 
+
+    vid_path, vid_writer = [None] * bs, [None] * bs
+
+    # Compute total frames
+    if is_video:
         # inp_vid = cv2.VideoCapture('testdata/accident_scene_Trim_Trim.mp4')
         inp_vid = cv2.VideoCapture(source)
         total_frames = inp_vid.get(cv2.CAP_PROP_FRAME_COUNT)
         ip_fps = int(inp_vid.get(cv2.CAP_PROP_FPS))
-
-
-    vid_path, vid_writer = [None] * bs, [None] * bs
-
-
+    else :
+        ip_fps = 1
 
     # Run inference
     model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
