@@ -114,7 +114,7 @@ def run(
         total_frames = inp_vid.get(cv2.CAP_PROP_FRAME_COUNT)
         ip_fps = int(inp_vid.get(cv2.CAP_PROP_FPS))
     else :
-        ip_fps = 1
+        ip_fps = total_frames = 1
 
     # Run inference
     model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
