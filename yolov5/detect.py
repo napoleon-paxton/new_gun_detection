@@ -183,7 +183,7 @@ def run(
 
             # Stream results
             im0 = annotator.result()
-            if view_img or save_img:
+            if view_img:
                 cv2.imshow(str(p), im0)
                 cv2.waitKey(1)  # 1 millisecond
 
