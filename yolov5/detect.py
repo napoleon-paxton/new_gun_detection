@@ -103,13 +103,16 @@ def run(
     else:
         dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt)
         bs = 1  # batch_size
+        # Compute total frames 
+        # inp_vid = cv2.VideoCapture('testdata/accident_scene_Trim_Trim.mp4')
+        inp_vid = cv2.VideoCapture(source)
+        total_frames = inp_vid.get(cv2.CAP_PROP_FRAME_COUNT)
+        ip_fps = int(inp_vid.get(cv2.CAP_PROP_FPS))
+
+
     vid_path, vid_writer = [None] * bs, [None] * bs
 
-    # Compute total frames 
-    # inp_vid = cv2.VideoCapture('testdata/accident_scene_Trim_Trim.mp4')
-    inp_vid = cv2.VideoCapture(source)
-    total_frames = inp_vid.get(cv2.CAP_PROP_FRAME_COUNT)
-    ip_fps = int(inp_vid.get(cv2.CAP_PROP_FPS))
+
 
     # Run inference
     model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
