@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="./static/eq_sur.css">
+  <title>EQ_SUR</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+
+<body>
+
+  <div class="heading">
+    <h2>
+      Napolean,
+    </h2>
+    <div class="heading-content">
+      <p> Here is the processed output from the file uploaded on {{ incident }} ... </p>
+    </div>
+
+    <ul style=" width:50%; float:left;">
+      <li>
+        {% if wd_detected %}
+        Weapons were detected in the video
+        {% endif %}
+
+      </li>
+      <li>
+        {{ lp_summary }}
+      </li>
+    </ul>
+
+    <ul style=" width:50%; float:right;">
+
+      <!-- offensive_lang_summary -->
+      <ul>
+        {% for line in offensive_lang_summary%}
+        <li>
+          {{ line }}
+        </li>
+        {% endfor%}
+      </ul>
+
+
+
+
+  </div>
+
+
+  <div class="container">
+    <div class="timeline">
+
+      <!-- merged_list -->
+
+      <ul>
+        {% for counter, hdr_txt, min, sec, img_url in merged_list%}
+        <li>
+          <div class="timeline-content">
+            <h3 class="date">{{min}} minutes, {{sec}} seconds </h3>
+            <h1>{{ hdr_txt }}</h1>
+            <img src="{{ img_url }}" width=150 height=150 />
+            <!-- <p>This image occurs at {{ lp_min }} minutes : {{lp_sec}} seconds in the original video </p> -->
+
+          </div>
+        </li>
+        {% endfor%}
+
+      </ul>
+
+
+    </div>
+  </div>
+
+  <script src="" async defer></script>
+</body>
+
+</html>

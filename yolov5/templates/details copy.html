@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="./static/eq_sur.css">
+  <title>EQ_SUR</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+
+<body>
+
+  <div class="heading">
+    <h2>
+      Hello!
+    </h2>
+    <div class="heading-content">
+      <p> Details of the incident on {{ incident }} are below ... </p>
+    </div>
+
+    <ul style=" width:50%; float:left;">
+      <li>
+        {% if wd_detected %}
+        Weapons were detected in the video
+        {% endif %}
+
+      </li>
+      <li>
+        {% if hate_language %}
+        Hate speech was used {{ num_hate_crime }} 3 (this is hard coded for now) times in the video
+        {% endif %}
+
+      </li>
+    </ul>
+
+    <ul style=" width:50%; float:right;">
+
+      <li>
+        {% if ppl_detected %}
+        People were detected in the video
+        {% endif %}
+
+      </li>
+      <li>
+        {% if hate_language %}
+        Offensive language was used {{ num_offensive_lang }} 5 (this is hard coded for now) times in the video
+        {% endif %}
+
+      </li>
+    </ul>
+
+
+
+
+  </div>
+
+
+  <div class="container">
+    <div class="timeline">
+      <!-- <form action="{{ url_for('handle_click') }}", method="post"> -->
+      <ul>
+        {% for wd_min, wd_sec, wd_img in wd_imgs%}
+        <li>
+          <div class="timeline-content">
+            <h3 class="date">{{ wd_min }} : {{wd_sec}} seconds</h3>
+            <h1>Gun detected</h1>
+            <img src="{{wd_img}}" width=200 />
+            <!-- <p>{{ img }}</p> -->
+            <p> Example of some text... hate speech will look like this</p>
+
+          </div>
+        </li>
+        {% endfor%}
+
+      </ul>
+
+
+      <ul>
+        {% for ppl_min, ppl_sec, ppl_img in ppl_imgs%}
+        <li>
+          <div class="timeline-content">
+            <h3 class="date">{{ ppl_min }} : {{ppl_sec}} seconds</h3>
+            <h1>Person detected</h1>
+            <img src="{{ppl_img}}" width=200 />
+            <!-- <p>{{ img }}</p> -->
+            <!-- <p> Example of some text... hate speech will look like this</p> -->
+
+          </div>
+        </li>
+        {% endfor%}
+
+      </ul>
+
+
+
+      <ul>
+        {% for lp_min, lp_sec, lic_plate_img in lic_plates%}
+        <li>
+          <div class="timeline-content">
+            <h3 class="date">{{ lp_min }} : {{lp_sec}} seconds</h3>
+            <h1>License plate detected</h1>
+            <img src="{{ lic_plate_img }}" width=200 />
+            <!-- <p>{{ lic_plate }}</p> -->
+            <p>The actual license number will be placed here. [Under Construction] </p>
+
+          </div>
+        </li>
+        {% endfor%}
+
+      </ul>
+      <!-- <input type="submit"> -->
+      </form>
+    </div>
+  </div>
+
+  <script src="" async defer></script>
+</body>
+
+</html>
